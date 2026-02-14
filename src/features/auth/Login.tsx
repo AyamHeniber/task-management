@@ -99,7 +99,10 @@ const Login: React.FC = () => {
                 if (process.env.NODE_ENV !== 'test') {
                   await new Promise(resolve => setTimeout(resolve, 800));
                 }
-                const response = await axios.post('/login', values);
+                const response = await axios.post('/login', {
+                  username: values.username.trim(),
+                  password: values.password.trim(),
+                });
                 dispatch(login(response.data));
                 message.success({ content: 'Welcome back!', className: 'rounded-xl' });
                 navigate('/');
